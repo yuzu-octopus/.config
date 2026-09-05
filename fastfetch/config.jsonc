@@ -344,7 +344,7 @@
     {
       "type": "command",
       "key": "├󰩟",
-      "text": "dig +short myip.opendns.com @resolver1.opendns.com 2>/dev/null",
+      "text": "curl -s --max-time 3 https://ipinfo.io/ip",
       "format": "{result}",
       "keyColor": "#ffa1d7",
       "outputColor": "#FF79C6",
