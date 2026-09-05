@@ -2,9 +2,9 @@
 
 format = """
 $cmd_duration\
-[](comment)\
+[](red)\
 $os\
-[](bg:comment fg:comment)\
+[](bg:comment fg:red)\
 $username\
 [](bg:purple fg:comment)\
 $directory\
@@ -32,7 +32,7 @@ add_newline = false
 
 [os]
 disabled = false
-style = "bg:comment fg:foreground"
+style = "bg:red fg:foreground"
 format = '[ $symbol ]($style)'
 
 [os.symbols]
