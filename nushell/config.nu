@@ -3,10 +3,8 @@ alias edit = micro
 alias nano = micro
 alias py = python3
 alias quit = exit
-#alias run = code_runner
 alias whatsapp = nchat
 alias pi = omp
-#alias cat = bat --paging=never
 
 $env.config = ($env.config
 | upsert show_banner false
@@ -29,7 +27,7 @@ $env.config = ($env.config
 # Load theme (ignore errors if file doesn't exist)
 try { source ~/.config/nushell/themes/dracula.nu } catch { }
 
-if ($env.TERM_PROGRAM != "zed") {
+if $nu.is-interactive and ($env.TERM_PROGRAM != "zed") {
     clear
     ^fastfetch
 }
