@@ -1,61 +1,28 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
+\
 $cmd_duration\
-[](red)\
-$os\
-[](bg:comment fg:red)\
+[](comment)\
 $username\
 [](bg:purple fg:comment)\
 $directory\
 [](bg:orange fg:purple)\
-$git_branch\
-$git_status\
+$git_branch$git_status\
 [](bg:cyan fg:orange)\
-$c\
-$rust\
-$golang\
 $nodejs\
 $bun\
-$php\
-$java\
-$kotlin\
-$haskell\
 $python\
-$conda\
+$golang\
+$rust\
+$java\
 [](bg:pink fg:cyan)\
 $time\
-[ ](fg:pink)"""
+[ ](fg:pink)
+"""
 
 palette = 'dracula'
 add_newline = false
-
-[os]
-disabled = false
-style = "bg:red fg:foreground"
-format = '[ $symbol ]($style)'
-
-[os.symbols]
-Windows = ""
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
-Macos = "󰀵"
-Manjaro = ""
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
-AOSC = ""
-Arch = "󰣇"
-Artix = "󰣇"
-CentOS = ""
-Debian = "󰣚"
-Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
 
 [username]
 show_always = true
@@ -71,11 +38,11 @@ truncation_symbol = "…/"
 home_symbol = "󰀵"
 
 [directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
+"Documents" = "  "
+"Downloads" = "  "
+"Music" = "  "
+"Pictures" = "  "
+"Developer" = "  "
 
 [git_branch]
 symbol = ""
@@ -84,63 +51,43 @@ format = '[[ $symbol $branch ](fg:foreground bg:orange)]($style)'
 
 [git_status]
 style = "bg:orange"
-format = '[[($all_status$ahead_behind )](fg:foreground bg:orange)]($style)'
+format = '[[($all_status$ahead_behind$stashed )](fg:foreground bg:orange)]($style)'
 
 [nodejs]
 symbol = ""
 style = "bg:cyan"
 format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
+detect_files = ["package.json", "package-lock.json", "bun.lock", "node_modules"]
 
 [bun]
 symbol = ""
 style = "bg:cyan"
 format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
+detect_files = ["bun.lockb", "bun.json"]
 
-[c]
-symbol = " "
+[python]
+symbol = ""
 style = "bg:cyan"
-format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
-
-[rust]
-symbol = ""
-style = "bg:cyan"
-format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
+format = '[[ $symbol( $version)( \($virtualenv\)) ](fg:foreground bg:cyan)]($style)'
+detect_files = ["requirements.txt", "pyproject.toml", "Pipfile", ".python-version"]
 
 [golang]
 symbol = ""
 style = "bg:cyan"
 format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
+detect_files = ["go.mod", "go.sum"]
 
-[php]
-symbol = ""
+[rust]
+symbol = ""
 style = "bg:cyan"
 format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
+detect_files = ["Cargo.toml"]
 
 [java]
-symbol = " "
+symbol = ""
 style = "bg:cyan"
 format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
-
-[kotlin]
-symbol = ""
-style = "bg:cyan"
-format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
-
-[haskell]
-symbol = ""
-style = "bg:cyan"
-format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
-
-[python]
-symbol = ""
-style = "bg:cyan"
-format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:foreground bg:cyan)]($style)'
-
-[conda]
-symbol = "  "
-style = "fg:foreground bg:cyan"
-format = '[$symbol$environment ]($style)'
-ignore_base = false
+detect_files = ["pom.xml", "build.gradle", "build.gradle.kts"]
 
 [time]
 disabled = false
@@ -160,16 +107,16 @@ format = " $duration\n"
 style = "bold fg:comment"
 disabled = false
 show_notifications = true
-min_time_to_notify = 45000
+min_time_to_notify = 15000
 
 [palettes.dracula]
-background = "#282A36"
 foreground = "#F8F8F2"
 pink = "#ff79c6"
 red = "#ff5555"
 yellow = "#f1fa8c"
 green = "#50fa7b"
-cyan = "#8be9fd"
+blue = "#644ac9"
 purple = "#bd93f9"
+cyan = "#8be9fd"
 orange = "#ffb86c"
 comment = "#6272a4"
