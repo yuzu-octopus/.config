@@ -3,6 +3,29 @@
 My personal configuration files. Managed as a monorepo, each config in its own
 directory or file.
 
+## Install
+
+```sh
+git clone https://github.com/yuzu-octopus/dotfiles.git
+cd dotfiles
+./install.sh
+```
+
+Copies everything into place, backing up existing files to `.bak`. Safe to
+re-run. Preview with `./install.sh --dry-run`.
+
+| Repo path | Installed to |
+|---|---|
+| `nushell/` | `~/.config/nushell/` |
+| `starship.toml` | `~/.config/starship.toml` |
+| `fastfetch/` | `~/.config/fastfetch/` (wifi helper made executable) |
+| `ghostty/config` | macOS: `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`, Linux: `~/.config/ghostty/config` |
+| `.omp/` | `~/.omp/agent/` |
+
+Two manual steps: re-add account emails to `~/.omp/agent/RULES.md`
+(the repo copy is redacted and never overwrites yours), then restart
+your shell.
+
 ## Contents
 
 - **[fastfetch/config.jsonc](./fastfetch/config.jsonc)** — Fastfetch system info
