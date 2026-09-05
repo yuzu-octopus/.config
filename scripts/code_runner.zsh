@@ -12,8 +12,8 @@
 #   code_runner --version
 #
 # Installation:
-#   sudo cp code_runner.zsh /usr/local/bin/code_runner
-#   sudo chmod +x /usr/local/bin/code_runner
+#   cp code_runner.zsh ~/.local/bin/code_runner
+#   chmod +x ~/.local/bin/code_runner
 #
 # Designed for use with Zed, but works from any terminal.
 #
@@ -117,7 +117,12 @@ run_with_tracking() {
 
 # ── Cleanup compiled binaries ───────────────────────────────────────────────
 cleanup_bin() {
-    [[ -n "${1:-}" ]] && [[ -f "$1" ]] && rm -- "$1"
+    [[ -n "${1:-}" && -f "$1" ]] || return 0
+    if command -v trash >/dev/null 2>&1; then
+        trash "$1"
+    else
+        rm -f -- "$1"
+    fi
 }
 
 # ── CLI Flags ───────────────────────────────────────────────────────────────
@@ -145,33 +150,33 @@ case "${1:-}" in
 esac
 
 # ── Argument Handling ───────────────────────────────────────────────────────
-# Zed passes arguments unquoted; rejoin them into a single path.
+# Split argv on -- quote-safely, then resolve the file path.
+# Zed passes paths unquoted; rejoin pre--- args only when the joined
+# path is a real file, so quoted paths containing spaces still work.
 # Support pass-through args after --: code_runner script.py -- arg1 arg2
-FILE_PATH="${(j: :)@}"
+PRE_ARGS=()
 PASS_ARGS=()
+in_pass_args=false
+for arg in "$@"; do
+    if [[ "$arg" == "--" ]] && ! $in_pass_args; then
+        in_pass_args=true
+        continue
+    fi
+    if $in_pass_args; then
+        PASS_ARGS+=("$arg")
+    else
+        PRE_ARGS+=("$arg")
+    fi
+done
 
-# Check for -- separator and extract pass-through arguments.
-if [[ "$FILE_PATH" == *"--"* ]]; then
-    # Re-parse original args to split on --
-    local_args=("$@")
-    FILE_PATH=""
-    PASS_ARGS=()
-    in_pass_args=false
-    for arg in "${local_args[@]}"; do
-        if [[ "$arg" == "--" ]]; then
-            in_pass_args=true
-            continue
-        fi
-        if $in_pass_args; then
-            PASS_ARGS+=("$arg")
-        else
-            if [[ -z "$FILE_PATH" ]]; then
-                FILE_PATH="$arg"
-            else
-                FILE_PATH="$FILE_PATH $arg"
-            fi
-        fi
-    done
+FILE_PATH=""
+if (( ${#PRE_ARGS} > 0 )); then
+    joined="${(j: :)PRE_ARGS}"
+    if [[ -f "$joined" ]]; then
+        FILE_PATH="$joined"
+    else
+        FILE_PATH="${PRE_ARGS[1]}"
+    fi
 fi
 
 if [[ -z "$FILE_PATH" ]]; then
