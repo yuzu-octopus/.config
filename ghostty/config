@@ -1,0 +1,13 @@
+#command = /opt/homebrew/bin/nu
+#command = /bin/zsh
+theme = Dracula
+window-theme = auto
+font-family = "JetBrainsMono Nerd Font"
+font-size = 15
+background-opacity = 0.6
+background-blur-radius = 20
+window-padding-x = 15
+window-padding-y = 15
+cursor-style = block
+cursor-click-to-move = true
+macos-option-as-alt = true

@@ -1,0 +1,145 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+\
+$cmd_duration\
+[](comment)\
+$username\
+[](bg:purple fg:comment)\
+$directory\
+[](bg:orange fg:purple)\
+$git_branch$git_status\
+[](bg:cyan fg:orange)\
+$nodejs\
+$bun\
+$python\
+$golang\
+$rust\
+$java\
+[](bg:pink fg:cyan)\
+$time\
+[ ](fg:pink)"""
+
+palette = 'dracula'
+add_newline = false
+
+[username]
+show_always = true
+style_user = "bg:comment fg:foreground"
+style_root = "bg:comment fg:foreground"
+format = '[$user ]($style)'
+
+[directory]
+style = "bg:purple fg:foreground"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = "󰀵"
+substitutions = [
+  # ---- Case-insensitive via (?i-u) ----
+  { from = "(?i-u)\\bdesktop\\b", to = "", regex = true },
+  { from = "(?i-u)\\bdocuments\\b", to = "󰈙", regex = true },
+  { from = "(?i-u)\\bdownloads\\b", to = "", regex = true },
+  { from = "(?i-u)\\bmusic\\b", to = "󰝚", regex = true },
+  { from = "(?i-u)\\bpictures\\b", to = "", regex = true },
+  { from = "(?i-u)\\bvideos\\b", to = "", regex = true },
+  { from = "(?i-u)\\bpublic\\b", to = "", regex = true },
+  { from = "(?i-u)\\blibrary\\b", to = "", regex = true },
+  { from = "(?i-u)\\bapplications\\b", to = "󰏖", regex = true },
+  { from = "(?i-u)\\bdeveloper\\b", to = "󰲋", regex = true },
+  { from = "(?i-u)\\bprojects\\b", to = "󰏗", regex = true },
+  { from = "(?i-u)\\bcode\\b", to = "", regex = true },
+  { from = "(?i-u)\\bscripts\\b", to = "", regex = true },
+  { from = "(?i-u)\\bwork\\b", to = "󰏛", regex = true },
+  { from = "(?i-u)\\bschool\\b", to = "", regex = true },
+  { from = "(?i-u)\\bgithub\\b", to = "", regex = true },
+  { from = "(?i-u)\\bicloud\\b", to = "󰂅", regex = true },
+  # ---- Maintained separately (different words per icon) ----
+  { from = "\\bnode_modules\\b", to = "󰎙", regex = true },
+  { from = "\\bvenv\\b", to = "󱧪", regex = true },
+  { from = "(?i-u)\\bconfig\\b", to = "", regex = true },
+  { from = "\\.config\\b", to = "", regex = true },
+  { from = "\\bdotfiles\\b", to = "", regex = true },
+  { from = "\\btmp\\b", to = "󰔐", regex = true },
+  { from = "(?i-u)\\btrash\\b", to = "󰏺", regex = true },
+  { from = "(?i-u)\\bgames\\b", to = "", regex = true },
+  { from = "(?i-u)\\bbooks\\b", to = "󰂿", regex = true },
+  { from = "(?i-u)\\bfonts\\b", to = "", regex = true },
+]
+
+[git_branch]
+symbol = ""
+style = "bg:orange"
+format = '[[ $symbol $branch ](fg:foreground bg:orange)]($style)'
+
+[git_status]
+style = "bg:orange"
+format = '[[($all_status$ahead_behind$stashed )](fg:foreground bg:orange)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
+detect_files = ["package.json", "package-lock.json", "bun.lock", "node_modules"]
+
+[bun]
+symbol = ""
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
+detect_files = ["bun.lockb", "bun.json"]
+
+[python]
+symbol = ""
+style = "bg:cyan"
+format = '[[ $symbol( $version)( \($virtualenv\)) ](fg:foreground bg:cyan)]($style)'
+detect_files = ["requirements.txt", "pyproject.toml", "Pipfile", ".python-version"]
+
+[golang]
+symbol = ""
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
+detect_files = ["go.mod", "go.sum"]
+
+[rust]
+symbol = ""
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
+detect_files = ["Cargo.toml"]
+
+[java]
+symbol = ""
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
+detect_files = ["pom.xml", "build.gradle", "build.gradle.kts"]
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:pink"
+format = '[[ $time ](fg:foreground bg:pink)]($style)'
+
+[line_break]
+disabled = true
+
+[character]
+disabled = true
+
+[cmd_duration]
+show_milliseconds = true
+format = " $duration\n"
+style = "bold fg:comment"
+disabled = false
+show_notifications = true
+min_time_to_notify = 15000
+
+[palettes.dracula]
+foreground = "#F8F8F2"
+pink = "#ff79c6"
+red = "#ff5555"
+yellow = "#f1fa8c"
+green = "#50fa7b"
+blue = "#644ac9"
+purple = "#bd93f9"
+cyan = "#8be9fd"
+orange = "#ffb86c"
+comment = "#6272a4"

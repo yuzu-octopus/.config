@@ -1,0 +1,28 @@
+# .config — Dotfiles
+
+My personal configuration files. Managed as a monorepo, each config in its own
+directory or file.
+
+## Contents
+
+- **[fastfetch/config.jsonc](./fastfetch/config.jsonc)** — Fastfetch system info
+  display with Dracula theme
+- **[fastfetch/fastfetch-wifi](./fastfetch/fastfetch-wifi)** — Wi-Fi status
+  helper used by the fastfetch config (macOS/arm64 binary)
+- **[ghostty/config](./ghostty/config)** — Ghostty terminal emulator settings
+- **[nushell/config.nu](./nushell/config.nu)** — Nushell shell configuration
+  (aliases, fuzzy completions, sqlite history, starship integration)
+- **[nushell/env.nu](./nushell/env.nu)** — Nushell environment (PATH, editor,
+  vivid Dracula LS_COLORS)
+- **[nushell/themes/](./nushell/themes/)** — Nushell color themes (Dracula)
+- **[scripts/code_runner.zsh](./scripts/code_runner.zsh)** — Polyglot file
+  runner with Dracula-themed output
+- **[starship.toml](./starship.toml)** — Starship prompt configuration
+- **[.omp/](./.omp/)** — Agent context (AGENTS, APPEND_SYSTEM, PERSONALITY,
+  RULES, agents, skills, rules). Account emails redacted; re-add locally.
+
+## Related
+
+- Portfolio site showcasing these configs:
+  [yuzu-octopus.github.io](https://yuzu-octopus.github.io)
+- All configs use the [Dracula theme](https://draculatheme.com) color palette
