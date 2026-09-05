@@ -16,8 +16,8 @@
       "2": "#BD93F9",
       "3": "#BD93F9",
       "4": "#BD93F9",
-      "6": "#BD93F9",
       "5": "#BD93F9",
+      "6": "#BD93F9",
     },
   },
   "display": {
@@ -86,7 +86,7 @@
   },
   "general": {
     "thread": true,
-    "processingTimeout": 500,
+    "processingTimeout": 2000,
     "detectVersion": true,
   },
   "modules": [
