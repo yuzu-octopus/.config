@@ -1,145 +1,182 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-\
-$cmd_duration\
-[](comment)\
+[](red)\
+$os\
 $username\
-[](bg:purple fg:comment)\
+[](bg:orange fg:red)\
 $directory\
-[](bg:orange fg:purple)\
-$git_branch$git_status\
-[](bg:cyan fg:orange)\
+[](bg:yellow fg:orange)\
+$git_branch\
+$git_status\
+[](fg:yellow bg:green)\
+$c\
+$rust\
+$golang\
 $nodejs\
 $bun\
-$python\
-$golang\
-$rust\
+$php\
 $java\
-[](bg:pink fg:cyan)\
+$kotlin\
+$haskell\
+$python\
+[](fg:green bg:cyan)\
+$conda\
+[](fg:cyan bg:purple)\
 $time\
-[ ](fg:pink)"""
+[](fg:purple)\
+$cmd_duration\
+$line_break\
+$character"""
 
 palette = 'dracula'
 add_newline = false
 
+[os]
+disabled = false
+style = "bg:red fg:background"
+
+[os.symbols]
+Windows = ""
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+AOSC = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
 [username]
 show_always = true
-style_user = "bg:comment fg:foreground"
-style_root = "bg:comment fg:foreground"
-format = '[$user ]($style)'
+style_user = "bg:red fg:background"
+style_root = "bg:red fg:background"
+format = '[ $user]($style)'
 
 [directory]
-style = "bg:purple fg:foreground"
+style = "bg:orange fg:background"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 home_symbol = "󰀵"
-substitutions = [
-  # ---- Case-insensitive via (?i-u) ----
-  { from = "(?i-u)\\bdesktop\\b", to = "", regex = true },
-  { from = "(?i-u)\\bdocuments\\b", to = "󰈙", regex = true },
-  { from = "(?i-u)\\bdownloads\\b", to = "", regex = true },
-  { from = "(?i-u)\\bmusic\\b", to = "󰝚", regex = true },
-  { from = "(?i-u)\\bpictures\\b", to = "", regex = true },
-  { from = "(?i-u)\\bvideos\\b", to = "", regex = true },
-  { from = "(?i-u)\\bpublic\\b", to = "", regex = true },
-  { from = "(?i-u)\\blibrary\\b", to = "", regex = true },
-  { from = "(?i-u)\\bapplications\\b", to = "󰏖", regex = true },
-  { from = "(?i-u)\\bdeveloper\\b", to = "󰲋", regex = true },
-  { from = "(?i-u)\\bprojects\\b", to = "󰏗", regex = true },
-  { from = "(?i-u)\\bcode\\b", to = "", regex = true },
-  { from = "(?i-u)\\bscripts\\b", to = "", regex = true },
-  { from = "(?i-u)\\bwork\\b", to = "󰏛", regex = true },
-  { from = "(?i-u)\\bschool\\b", to = "", regex = true },
-  { from = "(?i-u)\\bgithub\\b", to = "", regex = true },
-  { from = "(?i-u)\\bicloud\\b", to = "󰂅", regex = true },
-  # ---- Maintained separately (different words per icon) ----
-  { from = "\\bnode_modules\\b", to = "󰎙", regex = true },
-  { from = "\\bvenv\\b", to = "󱧪", regex = true },
-  { from = "(?i-u)\\bconfig\\b", to = "", regex = true },
-  { from = "\\.config\\b", to = "", regex = true },
-  { from = "\\bdotfiles\\b", to = "", regex = true },
-  { from = "\\btmp\\b", to = "󰔐", regex = true },
-  { from = "(?i-u)\\btrash\\b", to = "󰏺", regex = true },
-  { from = "(?i-u)\\bgames\\b", to = "", regex = true },
-  { from = "(?i-u)\\bbooks\\b", to = "󰂿", regex = true },
-  { from = "(?i-u)\\bfonts\\b", to = "", regex = true },
-]
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
 
 [git_branch]
 symbol = ""
-style = "bg:orange"
-format = '[[ $symbol $branch ](fg:foreground bg:orange)]($style)'
+style = "bg:yellow"
+format = '[[ $symbol $branch ](fg:background bg:yellow)]($style)'
 
 [git_status]
-style = "bg:orange"
-format = '[[($all_status$ahead_behind$stashed )](fg:foreground bg:orange)]($style)'
+style = "bg:yellow"
+format = '[[($all_status$ahead_behind )](fg:background bg:yellow)]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:cyan"
-format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
-detect_files = ["package.json", "package-lock.json", "bun.lock", "node_modules"]
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
 
 [bun]
 symbol = ""
-style = "bg:cyan"
-format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
-detect_files = ["bun.lockb", "bun.json"]
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
 
-[python]
-symbol = ""
-style = "bg:cyan"
-format = '[[ $symbol( $version)( \($virtualenv\)) ](fg:foreground bg:cyan)]($style)'
-detect_files = ["requirements.txt", "pyproject.toml", "Pipfile", ".python-version"]
-
-[golang]
-symbol = ""
-style = "bg:cyan"
-format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
-detect_files = ["go.mod", "go.sum"]
+[c]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:cyan"
-format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
-detect_files = ["Cargo.toml"]
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+
+[php]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
 
 [java]
-symbol = ""
-style = "bg:cyan"
-format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
-detect_files = ["pom.xml", "build.gradle", "build.gradle.kts"]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+
+[kotlin]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+
+[haskell]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+
+[python]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:background bg:green)]($style)'
+
+[conda]
+symbol = "  "
+style = "fg:background bg:cyan"
+format = '[$symbol$environment ]($style)'
+ignore_base = false
 
 [time]
 disabled = false
 time_format = "%R"
-style = "bg:pink"
-format = '[[ $time ](fg:foreground bg:pink)]($style)'
+style = "bg:purple"
+format = '[[  $time ](fg:background bg:purple)]($style)'
 
 [line_break]
 disabled = true
 
 [character]
-disabled = true
+disabled = false
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:green)'
+vimcmd_replace_one_symbol = '[❮](bold fg:purple)'
+vimcmd_replace_symbol = '[❮](bold fg:purple)'
+vimcmd_visual_symbol = '[❮](bold fg:yellow)'
 
 [cmd_duration]
 show_milliseconds = true
-format = " $duration\n"
-style = "bold fg:comment"
+format = " in $duration "
+style = "bg:purple"
 disabled = false
 show_notifications = true
-min_time_to_notify = 15000
+min_time_to_notify = 45000
 
 [palettes.dracula]
+background = "#282A36"
 foreground = "#F8F8F2"
 pink = "#ff79c6"
 red = "#ff5555"
 yellow = "#f1fa8c"
 green = "#50fa7b"
-blue = "#644ac9"
-purple = "#bd93f9"
 cyan = "#8be9fd"
+purple = "#bd93f9"
 orange = "#ffb86c"
 comment = "#6272a4"
