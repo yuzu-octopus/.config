@@ -1,15 +1,16 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](red)\
+$cmd_duration\
+[](comment)\
 $os\
 $username\
-[](bg:orange fg:red)\
+[](bg:purple fg:comment)\
 $directory\
-[](bg:yellow fg:orange)\
+[](bg:orange fg:purple)\
 $git_branch\
 $git_status\
-[](fg:yellow bg:green)\
+[](bg:cyan fg:orange)\
 $c\
 $rust\
 $golang\
@@ -20,21 +21,17 @@ $java\
 $kotlin\
 $haskell\
 $python\
-[](fg:green bg:cyan)\
 $conda\
-[](fg:cyan bg:purple)\
+[](bg:pink fg:cyan)\
 $time\
-[](fg:purple)\
-$cmd_duration\
-$line_break\
-$character"""
+[ ](fg:pink)"""
 
 palette = 'dracula'
 add_newline = false
 
 [os]
 disabled = false
-style = "bg:red fg:background"
+style = "bg:comment fg:foreground"
 
 [os.symbols]
 Windows = ""
@@ -60,12 +57,12 @@ RedHatEnterprise = "󱄛"
 
 [username]
 show_always = true
-style_user = "bg:red fg:background"
-style_root = "bg:red fg:background"
-format = '[ $user]($style)'
+style_user = "bg:comment fg:foreground"
+style_root = "bg:comment fg:foreground"
+format = '[$user ]($style)'
 
 [directory]
-style = "bg:orange fg:background"
+style = "bg:purple fg:foreground"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -80,91 +77,85 @@ home_symbol = "󰀵"
 
 [git_branch]
 symbol = ""
-style = "bg:yellow"
-format = '[[ $symbol $branch ](fg:background bg:yellow)]($style)'
+style = "bg:orange"
+format = '[[ $symbol $branch ](fg:foreground bg:orange)]($style)'
 
 [git_status]
-style = "bg:yellow"
-format = '[[($all_status$ahead_behind )](fg:background bg:yellow)]($style)'
+style = "bg:orange"
+format = '[[($all_status$ahead_behind )](fg:foreground bg:orange)]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
 
 [bun]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
 
 [c]
 symbol = " "
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
 
 [php]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
 
 [java]
 symbol = " "
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
 
 [kotlin]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
 
 [haskell]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:background bg:green)]($style)'
+style = "bg:cyan"
+format = '[[ $symbol( $version) ](fg:foreground bg:cyan)]($style)'
 
 [python]
 symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:background bg:green)]($style)'
+style = "bg:cyan"
+format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:foreground bg:cyan)]($style)'
 
 [conda]
 symbol = "  "
-style = "fg:background bg:cyan"
+style = "fg:foreground bg:cyan"
 format = '[$symbol$environment ]($style)'
 ignore_base = false
 
 [time]
 disabled = false
 time_format = "%R"
-style = "bg:purple"
-format = '[[  $time ](fg:background bg:purple)]($style)'
+style = "bg:pink"
+format = '[[  $time ](fg:foreground bg:pink)]($style)'
 
 [line_break]
 disabled = true
 
 [character]
-disabled = false
-success_symbol = '[❯](bold fg:green)'
-error_symbol = '[❯](bold fg:red)'
-vimcmd_symbol = '[❮](bold fg:green)'
-vimcmd_replace_one_symbol = '[❮](bold fg:purple)'
-vimcmd_replace_symbol = '[❮](bold fg:purple)'
-vimcmd_visual_symbol = '[❮](bold fg:yellow)'
+disabled = true
 
 [cmd_duration]
 show_milliseconds = true
-format = " in $duration "
-style = "bg:purple"
+format = " $duration\n"
+style = "bold fg:comment"
 disabled = false
 show_notifications = true
 min_time_to_notify = 45000
